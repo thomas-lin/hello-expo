@@ -1,0 +1,9 @@
+kind: pipeline
+name: build standalone app
+
+steps:
+  - name: test ci
+    image: node:10.16.0-stretch
+    command:
+    - yarn
+    - yarn test
