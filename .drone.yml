@@ -1,10 +1,6 @@
 kind: pipeline
 name: build standalone app
 
-platform:
-  arch: arm
-  os: linux
-
 steps:
 - name: export app
   image: node:10.16.0-stretch
