@@ -4,20 +4,20 @@ name: build standalone app
 steps:
   - name: build
     image: node:10.16.0-stretch
-    volumes:
-      - name: cache
-        path: /tmp/hello-expo-exported
     commands:
       - yarn
       - yarn global add expo-cli
       - expo optimize
       - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
-  - name: release to ota
-    image: plugins/gitea-release
-    settings:
-      api_key: bba8fa3a3118ba62f336277764aeba06617d8b0e
-      base_url: http://10.1.120.10:3000/thomas/ota-hello-expo
-      files: dist/*
+  - name: publish to ota
+    image: docker:git
+    commands:
+      - cd dist
+      - git init
+      - git remote add http://10.1.120.10:3000/thomas/ota-hello-expo
+      - git add *
+      - git commit -m "update"
+      - git push origin master
   # - name: export app
   #   image: bycedric/expo-cli
   #   volumes:
@@ -27,11 +27,6 @@ steps:
   #     - --version
   #     - optimize
   #     - export -p http://abc.123 --output-dir /tmp/hello-expo-exported
-
-trigger:
-  event:
-    - tag
-
 
 volumes:
 # - name: exported
