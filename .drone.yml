@@ -3,11 +3,12 @@ name: build standalone app
 
 steps:
 - name: export app
-  image: node
+  image: node:10.16.0-stretch
   volumes:
   - name: cache
     path: /tmp/hello-expo-exported
   command:
+  - export PATH="/usr/local/bin/yarn:$PATH"
   # - npm install -g yarn expo-cli
   - "yarn --version"
   # - yarn global --help
