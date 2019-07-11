@@ -4,14 +4,15 @@ name: build standalone app
 steps:
   - name: build
     image: node:10.16.0-stretch
-    command:
+    commands:
+      - yarn --version
       - yarn
   - name: export app
     image: bycedric/expo-cli
     volumes:
     - name: cache
       path: /tmp/hello-expo-exported
-    command:
+    commands:
       - --version
       - optimize
       - export -p http://abc.123 --output-dir /tmp/hello-expo-exported
