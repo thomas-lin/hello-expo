@@ -4,17 +4,25 @@ name: build standalone app
 steps:
   - name: build
     image: node:10.16.0-stretch
+    volumes:
+      - name: cache
+        path: /tmp
     commands:
       - yarn
       - yarn global add expo-cli
       - expo optimize
       - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
+      - cp -r dist /tmp
+
   - name: publish to ota
     image: docker:git
+    volumes:
+      - name: cache
+        path: /tmp
     commands:
-      - cd dist
+      - cd /tmp/dist
       - git init
-      - git remote add http://10.1.120.10:3000/thomas/ota-hello-expo
+      - git remote add origin http://10.1.120.10:3000/thomas/ota-hello-expo
       - git add *
       - git commit -m "update"
       - git push origin master
