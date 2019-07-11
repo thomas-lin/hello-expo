@@ -12,12 +12,16 @@ steps:
       - yarn global add expo-cli
       - expo optimize
       - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
+    when:
+      event: tag
   - name: release to ota
     image: plugins/gitea-release
     settings:
       api_key: bba8fa3a3118ba62f336277764aeba06617d8b0e
       base_url: http://10.1.120.10:3000/thomas/ota-hello-expo
       files: dist/*
+    when:
+      event: tag
   # - name: export app
   #   image: bycedric/expo-cli
   #   volumes:
