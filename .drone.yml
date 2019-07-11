@@ -13,7 +13,7 @@ steps:
       - expo optimize
       - expo export -p http://abc.123
       - cp -R dist /tmp/hello-expo-exported
-      - ls /tmp/hello-expo-exported
+      - ls /tmp/hello-expo-exported/dist
   # - name: export app
   #   image: bycedric/expo-cli
   #   volumes:
