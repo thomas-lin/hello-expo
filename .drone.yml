@@ -2,18 +2,22 @@ kind: pipeline
 name: build standalone app
 
 steps:
-  - name: export
+  - name: build
     image: node:10.16.0-stretch
     volumes:
       - name: cache
         path: /tmp/hello-expo-exported
     commands:
-      - yarn global add expo-cli
       - yarn
+      - yarn global add expo-cli
       - expo optimize
-      - expo export -p http://abc.123
-      - cp -R dist /tmp/hello-expo-exported
-      - ls /tmp/hello-expo-exported/dist
+      - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
+  - name: release to ota
+    image: plugins/gitea-release
+    settings:
+      api_key: bba8fa3a3118ba62f336277764aeba06617d8b0e
+      base_url: http://10.1.120.10:3000/thomas/ota-hello-expo
+      files: dist/*
   # - name: export app
   #   image: bycedric/expo-cli
   #   volumes:
