@@ -2,20 +2,24 @@ kind: pipeline
 name: build standalone app
 
 steps:
-  - name: build
+  - name: export
     image: node:10.16.0-stretch
-    commands:
-      - yarn --version
-      - yarn
-  - name: export app
-    image: bycedric/expo-cli
     volumes:
-    - name: cache
-      path: /tmp/hello-expo-exported
+      - name: cache
+        path: /tmp/hello-expo-exported
     commands:
-      - --version
-      - optimize
-      - export -p http://abc.123 --output-dir /tmp/hello-expo-exported
+      - yarn global add expo-cli
+      - yarn
+      - expo export -p http://abc.123 --output-dir /tmp/hello-expo-exported
+  # - name: export app
+  #   image: bycedric/expo-cli
+  #   volumes:
+  #   - name: cache
+  #     path: /tmp/hello-expo-exported
+  #   commands:
+  #     - --version
+  #     - optimize
+  #     - export -p http://abc.123 --output-dir /tmp/hello-expo-exported
 
 volumes:
 # - name: exported
