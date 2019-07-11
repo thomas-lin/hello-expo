@@ -3,7 +3,7 @@ name: build standalone app
 
 steps:
 - name: export app
-  image: node:10.16.0-stretch
+  image: node
   volumes:
   - name: cache
     path: /tmp/hello-expo-exported
