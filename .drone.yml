@@ -9,7 +9,7 @@ steps:
     path: /tmp/hello-expo-exported
   command:
   # - npm install -g yarn expo-cli
-  - yarn --version
+  - ["yarn","--version"]
   # - yarn global --help
   # - yarn global dir
   # - expo export -p http://abc.123 --output-dir /tmp/hello-expo-exported
