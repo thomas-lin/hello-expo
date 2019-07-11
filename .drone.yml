@@ -12,10 +12,8 @@ steps:
   - name: cache
     path: /tmp/hello-expo-exported
   command:
-  - $(command -v "yarn global --help")
-  - $(command -v "yarn global add expo-cli")
   # - npm install -g yarn expo-cli
-  # - yarn --version
+  - yarn --version
   # - yarn global --help
   # - yarn global dir
   # - expo export -p http://abc.123 --output-dir /tmp/hello-expo-exported
