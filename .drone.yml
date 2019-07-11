@@ -12,7 +12,8 @@ steps:
     - name: cache
       path: /tmp/hello-expo-exported
     command:
-      - export optimize
+      - --version
+      - optimize
       - export -p http://abc.123 --output-dir /tmp/hello-expo-exported
 
 volumes:
