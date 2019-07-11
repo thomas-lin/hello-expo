@@ -22,7 +22,7 @@
       "**/*"
     ],
     "android": {
-      "package": "com.thomas.hello-expo"
+      "package": "com.thomas.hello_expo"
     }
   }
 }
