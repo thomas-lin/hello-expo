@@ -6,11 +6,12 @@ steps:
     image: node:10.16.0-stretch
     volumes:
       - name: cache
-        path: /tmp/hello-expo-exported
+        path: /tmp/hello-expo-exported2
     commands:
       - yarn global add expo-cli
       - yarn
-      - expo export -p http://abc.123 --output-dir /tmp/hello-expo-exported
+      - expo optimize
+      - expo export -p http://abc.123 --output-dir /tmp/hello-expo-exported2
   # - name: export app
   #   image: bycedric/expo-cli
   #   volumes:
