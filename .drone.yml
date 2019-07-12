@@ -25,7 +25,9 @@ steps:
       USERNAME:
         from_secret: username
     commands:
-      - env
+      # - env
+      - echo ${USERNAME}
+      - echo $${TOKEN}
       - git config --global user.email "thomas@hello.expo"
       - git config --global user.name "Thomas"
       - cp package.json /tmp/test
