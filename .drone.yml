@@ -59,7 +59,7 @@ steps:
       - apt-get install -y nodejs
       - npm install -g yarn
       - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
-      - turtle setup:android --sdk-version
+      - turtle setup:android
       - echo "ABC"
       # - echo $AN1DROID_KEYSTORE_BASE64 > keystore.jks.base64
       # - base64 --decode keystore.jks.base64 > keystore.jks
