@@ -19,7 +19,7 @@ steps:
       - name: cache
         path: /tmp/test
     environment:
-      TOKEN:c3bf9b25e7d2fc44076535e9642819c0bf3d3ade
+      TOKEN: c3bf9b25e7d2fc44076535e9642819c0bf3d3ade
     commands:
       # - env
       - echo $TOKEN
