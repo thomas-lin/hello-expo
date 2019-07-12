@@ -13,27 +13,16 @@ steps:
   #     - expo optimize
   #     - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
   #     - cp -r dist /tmp
-  - name: test
-    image: node:10.16.0-stretch
-    environment:
-      TOKEN:
-        from_secret: giteaOTAToken
-    commands:
-      - echo $TOKEN
   - name: publish to ota by token
     image: docker:git
     volumes:
       - name: cache
         path: /tmp/test
     environment:
-      TOKEN:
-        from_secret: giteaOTAToken
-      USERNAME:
-        from_secret: username
+      TOKEN:c3bf9b25e7d2fc44076535e9642819c0bf3d3ade
     commands:
       # - env
-      - echo $GITEAOTATOKEN
-      - echo $${TOKEN}
+      - echo $TOKEN
       - git config --global user.email "thomas@hello.expo"
       - git config --global user.name "Thomas"
       - cp package.json /tmp/test
