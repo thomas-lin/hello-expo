@@ -62,8 +62,8 @@ steps:
       - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
       - turtle setup:android --sdk-version $EXPO_SDK_VERSION
       - echo $AN1DROID_KEYSTORE_BASE64 > keystore.jks.base64
-      # - base64 --decode keystore.jks.base64 > keystore.jks
-      # - cat keystore.jks
+      - base64 --decode keystore.jks.base64 > keystore.jks
+      - cat keystore.jks
       # - turtle build:android --public-url $PUBLIC_URL -t apk --keystore-path ./keystore.jks --keystore-alias $ANDROID_KEYSTORE_ALIAS -o ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
       # - cp ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk /tmp
 
