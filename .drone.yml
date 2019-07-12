@@ -34,8 +34,8 @@ steps:
       - git init temp && cd temp
       - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
       - git pull --rebase origin master
-      - cp /tmp/* ./
-      - git add * && git commit -m "publish ota"
+      - cp -r /tmp/dist/* ./
+      - git add * && git commit -m "publish to ota"
       - git push origin master
 
   - name: build standalone app
