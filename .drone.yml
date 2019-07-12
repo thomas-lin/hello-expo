@@ -28,7 +28,7 @@ steps:
       - cp package.json /tmp/test
       - cd /tmp/test
       - git init
-      - git remote add origin http://thomas:${TOKEN}@10.1.120.10:3000/thomas/ota-hello-expo
+      - git remote add origin http://thomas:$TOKEN@10.1.120.10:3000/thomas/ota-hello-expo
       - git add *
       - git commit -m "update"
       - git push origin master
