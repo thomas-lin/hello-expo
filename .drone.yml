@@ -32,6 +32,7 @@ steps:
       - cd /tmp/test
       - git init
       - git remote add origin http://thomas:$TOKEN@10.1.120.10:3000/thomas/ota-hello-expo
+      - git config --list
       - git add *
       - git commit -m "update"
       - git push origin master
