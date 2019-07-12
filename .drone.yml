@@ -4,51 +4,57 @@ name: build standalone app
 steps:
   - name: build
     image: node:10.16.0-stretch
+    environment:
+      PUBLIC_URL: http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
     volumes:
-      - name: cache
+      - name: dist
         path: /tmp
     commands:
       # - yarn
       # - yarn global add expo-cli
       # - expo optimize
-      # - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
+      # - expo export -p $PUBLIC_URL
       # - cp -r dist /tmp
       - echo $(date) > test.json
       - cp test.json /tmp
 
-  - name: publish to ota by token
+  - name: publish
     image: docker:git
     volumes:
-      - name: cache
+      - name: dist
         path: /tmp
     environment:
-      TOKEN: c3bf9b25e7d2fc44076535e9642819c0bf3d3ade
+      OTA_HOST: 10.1.120.10:3000
+      OTA_ACCOUNT: thomas
+      OTA_TOKEN: c3bf9b25e7d2fc44076535e9642819c0bf3d3ade
+      OTA_REPO: thomas/ota-hello-expo
+      USER_NAME: "Thomas Lin"
+      USER_EMALI: thomas@hello.expo
     commands:
-      # - env
-      - git config --global user.email "thomas@hello.expo"
-      - git config --global user.name "Thomas"
+      - git config --global user.email "$USER_EMAIL"
+      - git config --global user.name "$USER_NAME"
       - git init temp && cd temp
-      - git remote add origin http://thomas:$TOKEN@10.1.120.10:3000/thomas/ota-hello-expo
+      - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
       - git pull --rebase origin master
-      - git branch
-      # - git pull origin master && git checkout master
       - cp /tmp/* ./
       - git add * && git commit -m "publish ota"
-      - git status
       - git push origin master
-  # - name: export app
-  #   image: bycedric/expo-cli
-  #   volumes:
-  #   - name: cache
-  #     path: /tmp/hello-expo-exported
-  #   commands:
-  #     - --version
-  #     - optimize
-  #     - export -p http://abc.123 --output-dir /tmp/hello-expo-exported
+
+  - name: build standalone app
+    image: node:10.16.0-stretch
+    volumes:
+      - name: output
+        path: /tmp
+    commands:
+      - env
+
+  # - name: deploy
 
 volumes:
 # - name: exported
 #   host:
 #     path: /tmp/hello-expo-exported
-- name: cache
-  temp: {}
+  - name: dist
+    temp: {}
+  - name: output
+    temp: {}
