@@ -55,14 +55,12 @@ steps:
       EXPO_ANDROID_KEY_PASSWORD: 2j03z83
       PUBLIC_URL: http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master/android-index.json
     commands:
-      - bash --version
-      - echo $SHELL
-      # - curl -sL https://deb.nodesource.com/setup_10.x | bash -
-      # - apt-get install -y nodejs
-      # - npm install -g yarn
-      # - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
-      # - turtle setup:android
-      # - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
+      - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+      - apt-get install -y nodejs
+      - npm install -g yarn
+      - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
+      - turtle setup:android
+      - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
       # - base64 --decode keystore.jks.base64 > keystore.jks
       # - cat keystore.jks
       # - turtle build:android --public-url $PUBLIC_URL -t apk --keystore-path ./keystore.jks --keystore-alias $ANDROID_KEYSTORE_ALIAS -o ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
