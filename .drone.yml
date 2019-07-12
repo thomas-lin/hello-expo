@@ -21,11 +21,11 @@ steps:
         path: /tmp/test
     environment:
       TOKEN:
-        from_secret: gitea-ota-token
-      USERNAME: thomas
+        from_secret: giteaOTAToken
+      USERNAME:
+        from_secret: username
     commands:
       - env
-      - echo $gitea-ota-token
       - git config --global user.email "thomas@hello.expo"
       - git config --global user.name "Thomas"
       - cp package.json /tmp/test
