@@ -58,8 +58,8 @@ steps:
       - curl -sL https://deb.nodesource.com/setup_10.x | bash -
       - apt-get install -y nodejs
       - npm install -g yarn
-      - yarn --version
-      # - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
+      - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
+      - turtle --version
       # - turtle setup:android
       # - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
       # - base64 --decode keystore.jks.base64 > keystore.jks
