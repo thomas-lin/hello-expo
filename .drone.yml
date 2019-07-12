@@ -24,8 +24,8 @@ steps:
         from_secret: gitea-ota-token
       USERNAME: thomas
     commands:
-      - echo $TOKEN
-      - echo $USERNAME
+      - env
+      - echo $gitea-ota-token
       - git config --global user.email "thomas@hello.expo"
       - git config --global user.name "Thomas"
       - cp package.json /tmp/test
