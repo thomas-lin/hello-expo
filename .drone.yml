@@ -41,7 +41,7 @@ steps:
   #     - git push origin master
 
   - name: build standalone app
-    image: node:10.16.0-alpine
+    image: node:10.16.0-jessie-slim
     privileged: true
     volumes:
       - name: output
@@ -55,7 +55,7 @@ steps:
       EXPO_ANDROID_KEY_PASSWORD: 2j03z83
       PUBLIC_URL: http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master/android-index.json
     commands:
-      - apk update && apk add --no-cache openjdk8
+      - apt-get update && apt-get install -y openjdk-8-jdk --no-install-recommends
       - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
       # - export PATH=$(yarn global dir):$PATH
       # - echo $PATH
