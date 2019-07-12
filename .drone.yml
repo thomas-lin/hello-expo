@@ -26,13 +26,11 @@ steps:
       # - env
       - git config --global user.email "thomas@hello.expo"
       - git config --global user.name "Thomas"
-      - mkdir temp && cd temp
-      - git init
+      - git init temp && cd temp
       - git remote add origin http://thomas:$TOKEN@10.1.120.10:3000/thomas/ota-hello-expo
-      - git pull
+      - git pull && git checkout master
       - cp /tmp/package.json ./
-      - git add *
-      - git commit -m "update"
+      - git add * && git commit -m "publish ota"
       - git push origin master
   # - name: export app
   #   image: bycedric/expo-cli
