@@ -13,7 +13,8 @@ steps:
       # - expo optimize
       # - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
       # - cp -r dist /tmp
-      - cp package.json /tmp
+      - echo $(date) > test.json
+      - cp test.json /tmp
 
   - name: publish to ota by token
     image: docker:git
@@ -31,7 +32,7 @@ steps:
       - git pull --rebase origin master
       - git branch
       # - git pull origin master && git checkout master
-      - cp /tmp/package.json ./
+      - cp /tmp/* ./
       - git add * && git commit -m "publish ota"
       - git status
       - git push origin master
