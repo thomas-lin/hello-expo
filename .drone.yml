@@ -26,7 +26,7 @@ steps:
         from_secret: username
     commands:
       # - env
-      - echo ${USERNAME}
+      - echo $GITEAOTATOKEN
       - echo $${TOKEN}
       - git config --global user.email "thomas@hello.expo"
       - git config --global user.name "Thomas"
