@@ -2,34 +2,35 @@ kind: pipeline
 name: build standalone app
 
 steps:
-  # - name: build
-  #   image: node:10.16.0-stretch
-  #   volumes:
-  #     - name: cache
-  #       path: /tmp
-  #   commands:
-  #     - yarn
-  #     - yarn global add expo-cli
-  #     - expo optimize
-  #     - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
-  #     - cp -r dist /tmp
+  - name: build
+    image: node:10.16.0-stretch
+    volumes:
+      - name: cache
+        path: /tmp
+    commands:
+      # - yarn
+      # - yarn global add expo-cli
+      # - expo optimize
+      # - expo export -p http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master
+      # - cp -r dist /tmp
+      - cp package.json /tmp
+
   - name: publish to ota by token
     image: docker:git
     volumes:
       - name: cache
-        path: /tmp/test
+        path: /tmp
     environment:
       TOKEN: c3bf9b25e7d2fc44076535e9642819c0bf3d3ade
     commands:
       # - env
-      - echo $TOKEN
       - git config --global user.email "thomas@hello.expo"
       - git config --global user.name "Thomas"
-      - cp package.json /tmp/test
-      - cd /tmp/test
+      - mkdir temp && cd temp
       - git init
       - git remote add origin http://thomas:$TOKEN@10.1.120.10:3000/thomas/ota-hello-expo
-      - git config --list
+      - git pull
+      - cp /tmp/package.json ./
       - git add *
       - git commit -m "update"
       - git push origin master
