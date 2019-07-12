@@ -41,7 +41,7 @@ steps:
   #     - git push origin master
 
   - name: build standalone app
-    image: node:10.16.0-stretch
+    image: dsokal/expo-turtle-android
     volumes:
       - name: output
         path: /tmp
@@ -52,8 +52,8 @@ steps:
       EXPO_ANDROID_KEY_PASSWORD: 2j03z83
       PUBLIC_URL: http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master/android-index.json
     commands:
-      - apk update && apk add --no-cache openjdk8 base64
-      - yarn global add glup-cli turtle-cli
+      # - apk update && apk add --no-cache openjdk8 base64
+      # - yarn global add glup-cli turtle-cli
       - turtle setup:android
       - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
       - base64 --decode keystore.jks.base64 > keystore.jks
