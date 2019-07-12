@@ -41,8 +41,7 @@ steps:
   #     - git push origin master
 
   - name: build standalone app
-    # image: node:10.16.0-alpine
-    image: circleci/node:8.12
+    image: node:10.16.0-alpine
     volumes:
       - name: output
         path: /tmp
@@ -57,9 +56,10 @@ steps:
     commands:
       # - apk update && apk add --no-cache openjdk8
       - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
-      - export PATH=$(yarn global dir):$PATH
-      - echo $PATH
-      - turtle --version
+      # - export PATH=$(yarn global dir):$PATH
+      # - echo $PATH
+      # - turtle --version
+      - turtle
       # - turtle setup:android
       # - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
       # - base64 --decode keystore.jks.base64 > keystore.jks
