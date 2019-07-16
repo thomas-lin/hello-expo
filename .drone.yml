@@ -26,13 +26,11 @@ steps:
       - name: dist
         path: /dist
     commands:
-      # - yarn
-      # - yarn global add expo-cli
-      # - expo optimize
-      # - expo export -p $PUBLIC_URL
-      # - cp -r dist/* /dist
-      - touch ddd
-      - cp ddd /dist
+      - yarn
+      - yarn global add expo-cli
+      - expo optimize
+      - expo export -p $PUBLIC_URL
+      - cp -r dist/* /dist
 
   - name: publish
     image: docker:git
@@ -40,18 +38,11 @@ steps:
       - name: dist
         path: /dist
     environment:
-      OTA_HOST: 10.1.120.10:3000
-      OTA_ACCOUNT: thomas
-      OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
-      OTA_REPO: thomas/ota-hello-expo
       USER_NAME: "Thomas Lin"
       USER_EMALI: thomas@hello.expo
     commands:
       - git config --global user.email "$USER_EMAIL"
       - git config --global user.name "$USER_NAME"
-      # - git init temp && cd temp
-      # - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
-      # - git pull --rebase origin master
       - cp -r /dist/* ./ota && cd ota
       - git add * && git commit -m "publish to ota"
       - git push origin master
@@ -70,13 +61,11 @@ steps:
       EXPO_ANDROID_KEY_PASSWORD: 2j03z83
       PUBLIC_URL: http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master/android-index.json
     commands:
-      # - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
-      # - base64 --decode keystore.jks.base64 > keystore.jks
-      # - turtle build:android --public-url $PUBLIC_URL -t apk --keystore-path ./keystore.jks --keystore-alias $ANDROID_KEYSTORE_ALIAS -o ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
-      # - ls -al ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
-      # - cp ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk /output
-      - touch ./ttt.apk
-      - cp ./ttt.apk /output
+      - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
+      - base64 --decode keystore.jks.base64 > keystore.jks
+      - turtle build:android --public-url $PUBLIC_URL -t apk --keystore-path ./keystore.jks --keystore-alias $ANDROID_KEYSTORE_ALIAS -o ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
+      - ls -al ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
+      - cp ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk /output
 
   - name: deploy
     image: docker:git
@@ -84,18 +73,11 @@ steps:
       - name: output
         path: /output
     environment:
-      OTA_HOST: 10.1.120.10:3000
-      OTA_ACCOUNT: thomas
-      OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
-      OTA_REPO: thomas/ota-hello-expo
       USER_NAME: "Thomas Lin"
       USER_EMALI: thomas@hello.expo
     commands:
       - git config --global user.email "$USER_EMAIL"
       - git config --global user.name "$USER_NAME"
-      # - git init temp && cd temp
-      # - git remote set-url origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
-      # - git pull --rebase origin master
       - cp -r /output ./ota && cd ota
       - git add * && git commit -m "deploy app"
       - git push origin master
