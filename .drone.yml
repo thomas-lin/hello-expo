@@ -52,7 +52,7 @@ steps:
       EXPO_ANDROID_KEY_PASSWORD: 2j03z83
       PUBLIC_URL: http://10.1.120.10:3000/thomas/ota-hello-expo/raw/master/android-index.json
     commands:
-      - echo $AN1DROID_KEYSTORE_BASE64 > keystore.jks.base64
+      - echo $ANDROID_KEYSTORE_BASE64 > keystore.jks.base64
       - base64 --decode keystore.jks.base64 > keystore.jks
       - turtle build:android --public-url $PUBLIC_URL -t apk --keystore-path ./keystore.jks --keystore-alias $ANDROID_KEYSTORE_ALIAS -o ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
       - ls -al ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
