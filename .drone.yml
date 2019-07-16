@@ -2,22 +2,6 @@ kind: pipeline
 name: build standalone app
 
 steps:
-  - name: initialize ota
-    image: docker:git
-    environment:
-      OTA_HOST: 10.1.120.10:3000
-      OTA_ACCOUNT: thomas
-      OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
-      OTA_REPO: thomas/ota-hello-expo
-      USER_NAME: "Thomas Lin"
-      USER_EMALI: thomas@hello.expo
-    commands:
-      - git config --global user.email "$USER_EMAIL"
-      - git config --global user.name "$USER_NAME"
-      - git init ota && cd ota
-      - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
-      - git pull --rebase origin master
-
   - name: build
     image: node:10.16.0-stretch
     environment:
@@ -39,20 +23,20 @@ steps:
     volumes:
       - name: dist
         path: /dist
-    # environment:
-    #   OTA_HOST: 10.1.120.10:3000
-    #   OTA_ACCOUNT: thomas
-    #   OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
-    #   OTA_REPO: thomas/ota-hello-expo
-    #   USER_NAME: "Thomas Lin"
-    #   USER_EMALI: thomas@hello.expo
+    environment:
+      OTA_HOST: 10.1.120.10:3000
+      OTA_ACCOUNT: thomas
+      OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
+      OTA_REPO: thomas/ota-hello-expo
+      USER_NAME: "Thomas Lin"
+      USER_EMALI: thomas@hello.expo
     commands:
-      # - git config --global user.email "$USER_EMAIL"
-      # - git config --global user.name "$USER_NAME"
-      # - git init temp && cd temp
-      # - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
-      # - git pull --rebase origin master
-      - cp -r /dist/* ./ota && cd ota
+      - git config --global user.email "$USER_EMAIL"
+      - git config --global user.name "$USER_NAME"
+      - git init temp && cd temp
+      - git remote set-url origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
+      - git pull --rebase origin master
+      - cp -r /dist/* ./temp
       - git add * && git commit -m "publish to ota"
       - git push origin master
 
@@ -83,20 +67,20 @@ steps:
     volumes:
       - name: output
         path: /output
-    # environment:
-    #   OTA_HOST: 10.1.120.10:3000
-    #   OTA_ACCOUNT: thomas
-    #   OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
-    #   OTA_REPO: thomas/ota-hello-expo
-    #   USER_NAME: "Thomas Lin"
-    #   USER_EMALI: thomas@hello.expo
+    environment:
+      OTA_HOST: 10.1.120.10:3000
+      OTA_ACCOUNT: thomas
+      OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
+      OTA_REPO: thomas/ota-hello-expo
+      USER_NAME: "Thomas Lin"
+      USER_EMALI: thomas@hello.expo
     commands:
-      # - git config --global user.email "$USER_EMAIL"
-      # - git config --global user.name "$USER_NAME"
-      # - git init outputTemp && cd outputTemp
-      # - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
-      # - git pull --rebase origin master
-      - cp -r /output ./ota && cd ota
+      - git config --global user.email "$USER_EMAIL"
+      - git config --global user.name "$USER_NAME"
+      - git init temp && cd temp
+      - git remote set-url origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
+      - git pull --rebase origin master
+      - cp -r /output ./temp
       - git add * && git commit -m "deploy app"
       - git push origin master
 
