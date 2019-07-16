@@ -35,7 +35,7 @@ steps:
       # - expo optimize
       # - expo export -p $PUBLIC_URL
       # - cp -r dist/* /ota
-      - touch index.json
+      - touch $(date +%s).json
       - cp index.json /ota
 
   - name: publish js-bundle
@@ -74,7 +74,7 @@ steps:
       # - cp ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk /ota/output
       - touch ttt.apk
       - mkdir -p /ota/output
-      - cp ./ttt.apk /ota/output
+      - cp ./$(date +%s).apk /ota/output
 
   - name: deploy app
     image: docker:git
