@@ -35,8 +35,8 @@ steps:
       # - expo optimize
       # - expo export -p $PUBLIC_URL
       # - cp -r dist/* /ota
-      - touch $(date +%s).json
-      - cp index.json /ota
+      - touch $(date +%s)-index.json
+      - cp *-index.json /ota
 
   - name: publish js-bundle
     image: docker:git
@@ -72,9 +72,9 @@ steps:
       # - turtle build:android --public-url $PUBLIC_URL -t apk --keystore-path ./keystore.jks --keystore-alias $ANDROID_KEYSTORE_ALIAS -o ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk
       # - mkdir -p /ota/output
       # - cp ./$DRONE_REPO_NAME-$DRONE_COMMIT.apk /ota/output
-      - touch ttt.apk
+      - touch $(date +%s).apk
       - mkdir -p /ota/output
-      - cp ./$(date +%s).apk /ota/output
+      - cp ./*.apk /ota/output
 
   - name: deploy app
     image: docker:git
