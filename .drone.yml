@@ -16,27 +16,27 @@ steps:
       - expo export -p $PUBLIC_URL
       - cp -r dist /tmp
 
-  - name: publish
-    image: docker:git
-    volumes:
-      - name: dist
-        path: /tmp
-    environment:
-      OTA_HOST: 10.1.120.10:3000
-      OTA_ACCOUNT: thomas
-      OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
-      OTA_REPO: thomas/ota-hello-expo
-      USER_NAME: "Thomas Lin"
-      USER_EMALI: thomas@hello.expo
-    commands:
-      - git config --global user.email "$USER_EMAIL"
-      - git config --global user.name "$USER_NAME"
-      - git init temp && cd temp
-      - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
-      - git pull --rebase origin master
-      - cp -r /tmp/dist/* ./
-      - git add * && git commit -m "publish to ota"
-      - git push origin master
+  # - name: publish
+  #   image: docker:git
+  #   volumes:
+  #     - name: dist
+  #       path: /tmp
+  #   environment:
+  #     OTA_HOST: 10.1.120.10:3000
+  #     OTA_ACCOUNT: thomas
+  #     OTA_TOKEN: edcc6f07823c40e6e1c152ecdd566836dc393e54
+  #     OTA_REPO: thomas/ota-hello-expo
+  #     USER_NAME: "Thomas Lin"
+  #     USER_EMALI: thomas@hello.expo
+  #   commands:
+  #     - git config --global user.email "$USER_EMAIL"
+  #     - git config --global user.name "$USER_NAME"
+  #     - git init temp && cd temp
+  #     - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
+  #     - git pull --rebase origin master
+  #     - cp -r /tmp/dist/* ./
+  #     - git add * && git commit -m "publish to ota"
+  #     - git push origin master
 
   - name: build standalone app
     image: turtle-android:33.0.0
