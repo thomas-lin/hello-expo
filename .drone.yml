@@ -79,8 +79,8 @@ steps:
   - name: deploy app
     image: docker:git
     volumes:
-      - name: output
-        path: /output
+      - name: ota
+        path: /ota
     environment:
       USER_NAME: "Thomas Lin"
       USER_EMALI: thomas@hello.expo
