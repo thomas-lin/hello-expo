@@ -78,7 +78,7 @@ steps:
       - git init temp && cd temp
       - git remote add origin http://$OTA_ACCOUNT:$OTA_TOKEN@$OTA_HOST/$OTA_REPO
       - git pull --rebase origin master
-      - cp -R /output ./
+      - cp -r /output ./
       - git add * && git commit -m "deploy app"
       - git push origin master
 
