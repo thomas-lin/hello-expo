@@ -30,7 +30,7 @@ steps:
       # - yarn global add expo-cli
       # - expo optimize
       # - expo export -p $PUBLIC_URL
-      - cp -r dist/* /dist
+      # - cp -r dist/* /dist
       - touch ddd
       - cp ddd /dist
 
